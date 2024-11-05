@@ -1,6 +1,6 @@
 import pandas as pd 
 
-path = '2019.csv'
+path = '2017_2019.csv'
 
 Solar_data = pd.read_csv(path, encoding = 'latin1')
 
