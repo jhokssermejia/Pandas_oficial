@@ -26,7 +26,7 @@ tagged_words = pos_tag(tokens)
 print(tagged_words)'''
 
 #CUARTO EJERCICIO
-import nltk
+'''import nltk
 import random
 
 # Ejemplo de conjunto de datos de textos etiquetados
@@ -77,4 +77,31 @@ print("Accuracy:", accuracy)
 new_text = "This movie is amazing"
 new_text_features = preprocess(new_text)
 predicted_label = classifier.classify(new_text_features)
-print("Predicted label:", predicted_label)
+print("Predicted label:", predicted_label)'''
+
+#EJERCICIO 5
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import wordnet
+from nltk import pos_tag, word_tokenize
+
+# Inicializar el lematizador
+lemmatizer = WordNetLemmatizer()
+
+# Función para obtener la etiqueta de parte de discurso adecuada
+def get_wordnet_pos(word):
+    tag = pos_tag([word])[0][1][0].upper()
+    tag_dict = {"J": wordnet.ADJ, "N": wordnet.NOUN, "V": wordnet.VERB, "R": wordnet.ADV}
+    return tag_dict.get(tag, wordnet.NOUN)
+
+# Texto de ejemplo
+text = "The striped bats are hanging on their feet for best"
+
+# Tokenizar el texto
+tokens = word_tokenize(text)
+
+# Aplicar lematización a cada palabra con su etiqueta de POS
+lemmatized_words = [lemmatizer.lemmatize(word, get_wordnet_pos(word)) for word in tokens]
+
+# Mostrar el resultado
+print("Texto original:", text)
+print("Texto lematizado:", " ".join(lemmatized_words))
