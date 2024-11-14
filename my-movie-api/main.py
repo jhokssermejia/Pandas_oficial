@@ -1,3 +1,4 @@
+from fastapi import FastAPI, Body
 from fastapi import FastAPI #importa la clase FastAPI de la libreria fastapi
 from fastapi.responses import HTMLResponse
 
@@ -10,15 +11,19 @@ movies_list = [
         "id": 1,
         "title": "Dragon Ball",
         "overview": "Goku conoce a Bulma y van en busca de las esferas del Dragon para cumplir sus deseos",
-        "year": "1985",
-        "rating": 9.5
+        "year": "1986",
+        "rating": 9.5,
+        "category": "Anime",# Se agrega la categoria
+        "creator": "Akira Toriyama" #Se agrega el autor de la serie
     },
     {
         "id": 2,
         "title": "Dragon Ball Z",
         "overview": "Goku crece y pelea contra su hermano Raditz y luego viaja al planeta Namek a pelear contra Freezer",
-        "year": "1990",
-        "rating": 9.0
+        "year": "1989", #Año de creacion de la serie
+        "rating": 9.0,
+        "category": "Anime",# Se agrega la categoria
+        "creator": "Akira Toriyama" #Se agrega el autor de la serie
     }
 ]
 
@@ -39,3 +44,39 @@ def get_movie(id: int):
             return item
 
     return []
+
+@app . get ( '/movies/', tags=["Movies"])
+def get_movies_by_category(category: str, year: int):
+    return [item for item in movies_lis if item ['category'] == category]
+
+
+@app.post('/movies', tags=[ 'Movies'])
+def create_movie(id: int =Body(), title: str =Body(), overview: str =Body(), year: int =Body(), rating: float =Body(), category: str =Body()):
+    movies_list.append({
+        "id": id,
+        "title": title,
+        "overview": overview,
+        "year": year,
+        "rating": rating,
+        "category": category
+    })
+    return movies_list
+
+@app.put('/movies/{id}', tags=['Movies'])
+def update_movie(id: int, title: str =Body(), overview: str =Body(), year: int =Body(), rating: float =Body(), category: str =Body()):
+    for item in movies_list:
+        if item["id"] == id:
+            item['title'] = title,
+            item['overview' ] = overview,
+            item['year'] = year,
+            item['rating'] = rating,
+            item['category'] = category,
+            return movies_list
+
+
+@app.delete('/movies/{id}', tags=['Movies'])
+def delete_movie(id: int):
+    for item in movies_list:
+        if item["id"] == id:
+            movies_list.remove(item)
+            return movies_list
