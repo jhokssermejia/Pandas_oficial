@@ -37,7 +37,7 @@ def get_movies(): #aqui puse get_movies y estaba solo movies
     return movies_list
 
 
-@app.get('/movies/{id}' , tags=["Movies"])
+@app.get('/movies/{id}' , tags=["Movies"]) #anadimos el primer parametro de ruta
 def get_movie(id: int):
     for item in movies_list:
         if item["id"] == id:
