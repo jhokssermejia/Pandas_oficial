@@ -62,7 +62,16 @@ data = [
     {"categoria": "Soporte técnico", "frase": "¿Tienen soporte técnico?"},
     {"categoria": "Soporte técnico", "frase": "Mi aplicación no funciona"},
     {"categoria": "Soporte técnico", "frase": "¿Pueden ayudarme con un problema en mi cuenta?"},
+    {"categoria": "Felicitaciones", "frase": "Muy buen servicio"},
+    {"categoria": "Felicitaciones", "frase": "Todo perfecto, gracias"},
+    {"categoria": "Felicitaciones", "frase": "Excelente atención"},
+    {"categoria": "Felicitaciones", "frase": "¡Muy satisfecho con el producto!"},
+    {"categoria": "Felicitaciones", "frase": "Recomendaré su servicio"},
+    {"categoria": "Felicitaciones", "frase": "Gracias por la rápida respuesta"},
+    {"categoria": "Felicitaciones", "frase": "El equipo es muy amable"},
+    {"categoria": "Felicitaciones", "frase": "Estoy muy feliz con mi compra"}
 ]
+
 
 # Extraer las frases y las categorías para entrenamiento
 frases = [item["frase"] for item in data]
@@ -107,6 +116,7 @@ async def chat(request: MessageRequest):
         "Precios": "Para más detalles sobre precios, visita nuestro sitio web o contacta a ventas.",
         "Política de devolución": "Ofrecemos devoluciones dentro de los 30 días con el recibo original.",
         "Soporte técnico": "Para asistencia técnica, visita nuestro centro de ayuda o llama al soporte.",
+        "Felicitaciones": "Es un gusto atenderte, queremos que te sientas acompañado y satisfecho con nuestros servicios",
     }
 
     # Obtener la respuesta basada en la categoría predicha
