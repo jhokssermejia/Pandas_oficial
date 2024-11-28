@@ -1,17 +1,17 @@
 # Importa la clase principal para crear aplicaciones en FastAPI.
-from fastapi import FastAPI 
+from fastapi import FastAPI
 
 # Importa la clase base de Pydantic para la validación y estructuración de datos.
-from pydantic import BaseModel 
+from pydantic import BaseModel
 
 # Importa el vectorizador, una herramienta para convertir texto en representaciones numéricas basadas en la importancia de las palabras en un conjunto de documentos.
-from sklearn.feature_extraction.text import TfidfVectorizer 
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Importa el clasificador Naive Bayes, un modelo de aprendizaje supervisado útil para clasificar datos textuales.
-from sklearn.naive_bayes import MultinomialNB 
+from sklearn.naive_bayes import MultinomialNB
 
-# Importa una función para crear  modelos de aprendizaje (como Naive Bayes).
-from sklearn.pipeline import make_pipeline 
+# Importa una función para crear modelos de aprendizaje (como Naive Bayes).
+from sklearn.pipeline import make_pipeline
 
 # Importa la clase `List` para especificar tipos de datos más complejos en las anotaciones de tipo.
 from typing import List
@@ -60,26 +60,27 @@ data = [
     {"categoria": "Soporte técnico", "frase": "Tengo un problema técnico"},
     {"categoria": "Soporte técnico", "frase": "¿Cómo puedo solucionar un error?"},
     {"categoria": "Soporte técnico", "frase": "¿Tienen soporte técnico?"},
-    {"categoria": "Soporte técnico", "frase": "Mi aplicación no funciona"},
+    {"categoria": "Soporte técnico", "frase": "Mi aplicación no funciona"},#usar de ejemplo
     {"categoria": "Soporte técnico", "frase": "¿Pueden ayudarme con un problema en mi cuenta?"},
-    {"categoria": "Felicitaciones", "frase": "Muy buen servicio"},
-    {"categoria": "Felicitaciones", "frase": "Todo perfecto, gracias"},
-    {"categoria": "Felicitaciones", "frase": "Excelente atención"},
-    {"categoria": "Felicitaciones", "frase": "¡Muy satisfecho con el producto!"},
-    {"categoria": "Felicitaciones", "frase": "Recomendaré su servicio"},
-    {"categoria": "Felicitaciones", "frase": "Gracias por la rápida respuesta"},
-    {"categoria": "Felicitaciones", "frase": "El equipo es muy amable"},
-    {"categoria": "Felicitaciones", "frase": "Estoy muy feliz con mi compra"}
+    {"categoria": "Agradecimiento", "frase": "Muy buen servicio"},
+    {"categoria": "Agradecimiento", "frase": "Todo perfecto, gracias"}, #usar de ejemplo
+    {"categoria": "Agradecimiento", "frase": "Excelente atención"},
+    {"categoria": "Agradecimiento", "frase": "¡Muy satisfecho con el producto!"},
+    {"categoria": "Agradecimiento", "frase": "Recomendaré su servicio"},
+    {"categoria": "Agradecimiento", "frase": "Gracias por la rápida respuesta"},
+    {"categoria": "Agradecimiento", "frase": "El equipo es muy amable"},
+    {"categoria": "Agradecimiento", "frase": "Estoy muy feliz con mi compra"}
 ]
-
 
 # Extraer las frases y las categorías para entrenamiento
 frases = [item["frase"] for item in data]
 categorias = [item["categoria"] for item in data]
 
 # Crear y entrenar el clasificador Naive Bayes en un pipeline
-model = make_pipeline(TfidfVectorizer(), MultinomialNB())
-model.fit(frases, categorias)
+vectorizer = TfidfVectorizer()
+x_train = vectorizer.fit_transform(frases)
+classifier = MultinomialNB()
+classifier.fit(x_train, categorias)
 
 # Aplicación FastAPI
 app = FastAPI()
@@ -92,20 +93,25 @@ class MessageRequest(BaseModel):
 @app.post("/chat")
 async def chat(request: MessageRequest):
     mensaje_usuario = request.message
-    
+
     # Predicción de categoría
-    predecir_categoria = model.predict([mensaje_usuario])[0]
-    
+    x_test = vectorizer.transform([mensaje_usuario])
+    predecir_categoria = classifier.predict(x_test)[0]
+
     # Análisis de sentimiento usando NLTK
     sentimiento = sia.polarity_scores(mensaje_usuario)
-    
+
     # Determinar el tono basado en el puntaje de sentimiento
-    if sentimiento['compound'] >= 0.05:
+    if sentimiento['compound'] >= 0.2:
+        tono = "muy positivo"
+    elif 0.05 <= sentimiento['compound'] < 0.2:
         tono = "positivo"
-    elif sentimiento['compound'] <= -0.05:
+    elif -0.05 < sentimiento['compound'] < 0.05:
+        tono = "neutral"
+    elif -0.2 < sentimiento['compound'] <= -0.05:
         tono = "negativo"
     else:
-        tono = "neutral"
+        tono = "muy negativo"
 
     # Respuestas predefinidas basadas en la categoría predicha
     respuestas = {
@@ -116,19 +122,38 @@ async def chat(request: MessageRequest):
         "Precios": "Para más detalles sobre precios, visita nuestro sitio web o contacta a ventas.",
         "Política de devolución": "Ofrecemos devoluciones dentro de los 30 días con el recibo original.",
         "Soporte técnico": "Para asistencia técnica, visita nuestro centro de ayuda o llama al soporte.",
-        "Felicitaciones": "Es un gusto atenderte, queremos que te sientas acompañado y satisfecho con nuestros servicios",
+        "Agradecimiento": "Es un gusto atenderte, queremos que te sientas acompañado y satisfecho con nuestros servicios"
     }
 
     # Obtener la respuesta basada en la categoría predicha
     texto_respuesta = respuestas.get(predecir_categoria, "Lo siento, no entiendo tu pregunta. ¿Puedes reformularla?")
-    
+
     return {
+        "mensaje usuario": mensaje_usuario,
         "categoria": predecir_categoria,
         "respuesta": texto_respuesta,
-        "sentimiento": tono
+        "sentimiento": tono        
     }
 
 # Ruta de prueba para verificar que el servidor está activo
 @app.get("/")
 async def root():
     return {"message": "Chatbot activo y esperando mensajes"}
+
+# Ruta para mostrar el vocabulario y las frecuencias
+@app.get("/vocabulario")
+async def vocabulario():
+    vocab = vectorizer.vocabulary_
+    idf = vectorizer.idf_
+    vocabulario_frecuencias = {
+        palabra: {
+            "indice": vocab[palabra],
+            "idf": idf[vocab[palabra]]
+        }
+        for palabra in vocab
+    }
+    return {
+        "vocabulario": vocabulario_frecuencias
+        
+    }
+

@@ -32,7 +32,7 @@ movies_list = [
 def message(): #Definimos una funcion de la ruta
     return HTMLResponse('<h1>Hello World<h1>')#Devolmemos un string en la respuesta de la ruta
 
-@app. get ( '/movies', tags=["Movies"]) #definimos una ruta de la clase FastAPI
+@app.get ( '/movies', tags=["Movies"]) #definimos una ruta de la clase FastAPI
 def get_movies(): #aqui puse get_movies y estaba solo movies
     return movies_list
 
