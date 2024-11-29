@@ -33,44 +33,90 @@ data = [
     {"categoria": "Saludo", "frase": "buenos días"},
     {"categoria": "Saludo", "frase": "buenas tardes"},
     {"categoria": "Saludo", "frase": "buenas noches"},
+    {"categoria": "Saludo", "frase": "¡Qué gusto verte!"},
+    {"categoria": "Saludo", "frase": "¡Hola a todos!"},
+    {"categoria": "Saludo", "frase": "Un placer saludarte"},
+    {"categoria": "Saludo", "frase": "¿Qué tal?"},
+    {"categoria": "Saludo", "frase": "¡Saludos cordiales!"},
+
     {"categoria": "Despedida", "frase": "adiós"},
     {"categoria": "Despedida", "frase": "hasta luego"},
     {"categoria": "Despedida", "frase": "nos vemos"},
     {"categoria": "Despedida", "frase": "me despido"},
+    {"categoria": "Despedida", "frase": "hasta pronto"},
+    {"categoria": "Despedida", "frase": "cuídense mucho"},
+    {"categoria": "Despedida", "frase": "que tengas un buen día"},
+    {"categoria": "Despedida", "frase": "nos hablamos luego"},
+    {"categoria": "Despedida", "frase": "hasta mañana"},
+
     {"categoria": "Información de contacto", "frase": "¿Cómo puedo contactarlos?"},
     {"categoria": "Información de contacto", "frase": "¿Cuál es el número de teléfono?"},
     {"categoria": "Información de contacto", "frase": "¿Tienen algún correo electrónico?"},
     {"categoria": "Información de contacto", "frase": "¿Dónde están ubicados?"},
     {"categoria": "Información de contacto", "frase": "¿Cómo puedo llegar a sus oficinas?"},
+    {"categoria": "Información de contacto", "frase": "¿Cuál es su página web?"},
+    {"categoria": "Información de contacto", "frase": "¿Puedo enviarles un mensaje por redes sociales?"},
+    {"categoria": "Información de contacto", "frase": "¿Tienen algún número de WhatsApp?"},
+    {"categoria": "Información de contacto", "frase": "¿Puedo agendar una llamada?"},
+
     {"categoria": "Horario de atención", "frase": "¿Cuál es el horario de atención?"},
     {"categoria": "Horario de atención", "frase": "¿En qué días están abiertos?"},
     {"categoria": "Horario de atención", "frase": "¿Están abiertos los fines de semana?"},
     {"categoria": "Horario de atención", "frase": "¿A qué hora abren?"},
     {"categoria": "Horario de atención", "frase": "¿A qué hora cierran?"},
+    {"categoria": "Horario de atención", "frase": "¿Están abiertos en días festivos?"},
+    {"categoria": "Horario de atención", "frase": "¿Tienen horario especial en vacaciones?"},
+    {"categoria": "Horario de atención", "frase": "¿Cuándo es su próximo día no laborable?"},
+    {"categoria": "Horario de atención", "frase": "¿Cuánto tiempo permanecen abiertos?"},
+
     {"categoria": "Precios", "frase": "¿Cuánto cuesta el producto?"},
     {"categoria": "Precios", "frase": "¿Cuál es el precio del servicio?"},
     {"categoria": "Precios", "frase": "¿Tienen algún descuento?"},
     {"categoria": "Precios", "frase": "¿Cuánto cuesta la suscripción mensual?"},
     {"categoria": "Precios", "frase": "¿Cuál es el costo de envío?"},
+    {"categoria": "Precios", "frase": "¿Tienen precios promocionales?"},
+    {"categoria": "Precios", "frase": "¿Puedo pagar a plazos?"},
+    {"categoria": "Precios", "frase": "¿Cuál es el precio para grupos?"},
+    {"categoria": "Precios", "frase": "¿Tienen precios diferentes para empresas?"},
+
     {"categoria": "Política de devolución", "frase": "¿Cuál es la política de devoluciones?"},
     {"categoria": "Política de devolución", "frase": "¿Puedo devolver el producto?"},
     {"categoria": "Política de devolución", "frase": "¿Cuánto tiempo tengo para hacer una devolución?"},
     {"categoria": "Política de devolución", "frase": "¿Necesito el recibo para una devolución?"},
     {"categoria": "Política de devolución", "frase": "¿Es posible cambiar un producto?"},
+    {"categoria": "Política de devolución", "frase": "¿Aceptan devoluciones sin empaque original?"},
+    {"categoria": "Política de devolución", "frase": "¿Tienen una política de reembolso?"},
+    {"categoria": "Política de devolución", "frase": "¿Cuánto tiempo tardan en procesar una devolución?"},
+    {"categoria": "Política de devolución", "frase": "¿Puedo cambiar un producto defectuoso?"},
+
     {"categoria": "Soporte técnico", "frase": "Tengo un problema técnico"},
     {"categoria": "Soporte técnico", "frase": "¿Cómo puedo solucionar un error?"},
     {"categoria": "Soporte técnico", "frase": "¿Tienen soporte técnico?"},
-    {"categoria": "Soporte técnico", "frase": "Mi aplicación no funciona"},#usar de ejemplo
+    {"categoria": "Soporte técnico", "frase": "Mi aplicación no funciona"},#
     {"categoria": "Soporte técnico", "frase": "¿Pueden ayudarme con un problema en mi cuenta?"},
+    {"categoria": "Soporte técnico", "frase": "¿Cómo actualizo mi software?"},
+    {"categoria": "Soporte técnico", "frase": "¿Qué hacer si mi dispositivo no responde?"},
+    {"categoria": "Soporte técnico", "frase": "¿Dónde puedo reportar un bug?"},
+    {"categoria": "Soporte técnico", "frase": "¿Tienen un chat de soporte?"},
+
     {"categoria": "Agradecimiento", "frase": "Muy buen servicio"},
-    {"categoria": "Agradecimiento", "frase": "Todo perfecto, gracias"}, #usar de ejemplo
+    {"categoria": "Agradecimiento", "frase": "Todo perfecto, gracias"},#
     {"categoria": "Agradecimiento", "frase": "Excelente atención"},
     {"categoria": "Agradecimiento", "frase": "¡Muy satisfecho con el producto!"},
     {"categoria": "Agradecimiento", "frase": "Recomendaré su servicio"},
     {"categoria": "Agradecimiento", "frase": "Gracias por la rápida respuesta"},
     {"categoria": "Agradecimiento", "frase": "El equipo es muy amable"},
-    {"categoria": "Agradecimiento", "frase": "Estoy muy feliz con mi compra"}
+    {"categoria": "Agradecimiento", "frase": "Estoy muy feliz con mi compra"},
+    {"categoria": "Agradecimiento", "frase": "Gracias por su dedicación"},
+    {"categoria": "Agradecimiento", "frase": "Muy profesional todo el proceso"},
+
+    {"categoria": "Sugerencia", "frase": "Sería genial tener más horarios disponibles"},
+    {"categoria": "Sugerencia", "frase": "Podrían agregar más opciones de pago"},
+    {"categoria": "Sugerencia", "frase": "Consideren mejorar los tiempos de respuesta"},
+    {"categoria": "Sugerencia", "frase": "Un chat en línea sería muy útil"},
+    {"categoria": "Sugerencia", "frase": "Añadan más productos a su catálogo"}
 ]
+
 
 # Extraer las frases y las categorías para entrenamiento
 frases = [item["frase"] for item in data]
@@ -122,7 +168,8 @@ async def chat(request: MessageRequest):
         "Precios": "Para más detalles sobre precios, visita nuestro sitio web o contacta a ventas.",
         "Política de devolución": "Ofrecemos devoluciones dentro de los 30 días con el recibo original.",
         "Soporte técnico": "Para asistencia técnica, visita nuestro centro de ayuda o llama al soporte.",
-        "Agradecimiento": "Es un gusto atenderte, queremos que te sientas acompañado y satisfecho con nuestros servicios"
+        "Agradecimiento": "Es un gusto atenderte, queremos que te sientas acompañado y satisfecho con nuestros servicios",
+        "Sugerencia": "Gracias por tus comentarios, haremos lo posible por mejorar"
     }
 
     # Obtener la respuesta basada en la categoría predicha
