@@ -58,6 +58,6 @@ edges = cv2.magnitude(sobelx, sobely)
 #Normalizar los valores para mostrar la imagen correctamente
 edges = cv2.normalize(edges, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
 #Mostrar la imagen con los bordes detectados
-cv2.imshow('Image', edges)
+cv2.imshow('Imagen con deteccion de bordes: ', edges)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
